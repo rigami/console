@@ -7,6 +7,10 @@ const theme = createMuiTheme({
         primary: { main: '#62B9FE' },
         secondary: { main: '#FFE16B' },
     },
+    sidebar: {
+        width: 240, // The default value is 240
+        closedWidth: 72, // The default value is 55
+    },
     overrides: {
         MuiCssBaseline: {
             '@global': {

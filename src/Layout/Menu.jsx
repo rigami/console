@@ -9,17 +9,22 @@ import {
 } from 'react-admin';
 import SubMenu from './SubMenu';
 import { capitalize } from 'lodash';
+import { ExpandLessRounded as ArrowUpIcon } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
+    list: {
+        paddingRight: theme.spacing(2),
+        paddingTop: theme.spacing(2),
+    },
     root: {
         borderTopRightRadius: theme.spacing(2.25),
         borderBottomRightRadius: theme.spacing(2.25),
-        wordBreak: 'break-word',
-        whiteSpace: 'normal',
+        // wordBreak: 'break-word',
+        // whiteSpace: 'normal',
     },
     active: {
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.primary.contrastText,
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.secondary.contrastText,
     },
 }));
 
@@ -32,9 +37,9 @@ function TreeMenu({ sidebarIsOpen, onMenuClick, resources, dense, name }) {
             handleToggle={() => setIsOpen(!isOpen)}
             isOpen={isOpen}
             sidebarIsOpen={sidebarIsOpen}
+            icon={<ArrowUpIcon/>}
             name={name}
             dense={dense}
-            classes={{ root: classes.root }}
         >
             {resources.map((item) => (
                 <MenuItemLink
@@ -62,7 +67,7 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
     const resources = useSelector(getResources);
 
     return (
-        <List dense={false}>
+        <List dense={false} className={classes.list}>
             <DashboardMenuItem
                 onClick={onMenuClick}
                 sidebarIsOpen={open} classes={{ root: classes.root, active: classes.active }}
