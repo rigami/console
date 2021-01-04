@@ -1,4 +1,4 @@
-import { Toolbar, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { AppBar } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -18,7 +18,7 @@ const CustomAppBar = (props) => {
     const classes = useStyles();
 
     return (
-        <AppBar {...props} title="Rigami admin panel" userMenu={true}>
+        <AppBar {...props} title="Rigami admin panel" userMenu={false}>
             <Typography
                 variant="h6"
                 color="inherit"
