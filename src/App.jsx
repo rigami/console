@@ -1,13 +1,17 @@
-import * as React from "react";
+import React from "react";
 import { Admin, Resource } from 'react-admin';
 import Layout from './Layout';
 import theme from "./Layout/theme";
 import Dashboard from "./Pages/Dashboard";
 import { BGCollectionsList } from "./Pages/BGCollections";
 import { BGBlackList } from './Pages/BGBlackList';
+import { ReportsList } from './Pages/ReportsList';
+import { TestingRequestList } from './Pages/TestingRequestList';
 import {
     CollectionsRounded as BGCollectionsIcon,
     BlockRounded as BGBlackListIcon,
+    BugReportRounded as BugReportIcon,
+    HowToRegRounded as TestingRequestIcon,
 } from "@material-ui/icons";
 import i18nProvider from './i18nProvider';
 import dataProvider from './dataProvider';
@@ -22,6 +26,18 @@ function App() {
             dashboard={Dashboard}
             disableTelemetry
         >
+            <Resource
+                name="testing_request"
+                options={{ label: "Testing request" }}
+                list={TestingRequestList}
+                icon={TestingRequestIcon}
+            />
+            <Resource
+                name="reports"
+                options={{ label: "Reports" }}
+                list={ReportsList}
+                icon={BugReportIcon}
+            />
             <Resource
                 name="backgrounds/collections"
                 options={{ label: "Collections" }}
