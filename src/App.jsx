@@ -6,7 +6,7 @@ import Dashboard from "./Pages/Dashboard";
 import { BGCollectionsList } from "./Pages/BGCollections";
 import { BGBlackList } from './Pages/BGBlackList';
 import { ReportsList } from './Pages/ReportsList';
-import { TestingRequestList } from './Pages/TestingRequestList';
+import { TestingRequestList, TestingRequestCreate } from './Pages/TestingRequestList';
 import {
     CollectionsRounded as BGCollectionsIcon,
     BlockRounded as BGBlackListIcon,
@@ -27,9 +27,10 @@ function App() {
             disableTelemetry
         >
             <Resource
-                name="testing_request"
+                name="testing-request"
                 options={{ label: "Testing request" }}
                 list={TestingRequestList}
+                create={TestingRequestCreate}
                 icon={TestingRequestIcon}
             />
             <Resource

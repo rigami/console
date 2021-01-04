@@ -10,6 +10,10 @@ import {
     sanitizeListRestProps,
     Filter,
     TextInput,
+    Create,
+    SimpleForm,
+    ShowButton,
+    ListButton,
 } from 'react-admin';
 
 const PostFilter = (props) => (
@@ -54,7 +58,23 @@ export const TestingRequestList = (props) => (
             <TextField source="email" />
             <TextField source="name" />
             <TextField source="reason" />
-            <BooleanField source="commentable" />
         </Datagrid>
     </List>
+);
+
+const PostEditActions = ({ basePath, data, resource }) => (
+    <TopToolbar>
+        <ListButton basePath={basePath} record={data} />
+    </TopToolbar>
+);
+
+
+export const TestingRequestCreate = (props) => (
+    <Create {...props} title="Create request" actions={<PostEditActions />}>
+        <SimpleForm>
+            <TextInput source="email" />
+            <TextInput source="name" />
+            <TextInput source="reason" options={{ multiLine: true }} />
+        </SimpleForm>
+    </Create>
 );

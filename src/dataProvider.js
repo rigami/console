@@ -6,8 +6,8 @@ const httpClient = (url, options = {}) => {
         options.headers = new Headers({ Accept: 'application/json' });
     }
     // add your own headers here
-    options.headers.set('X-Custom-Header', 'foobar');
+    // options.headers.set('X-Custom-Header', 'foobar');
     return fetchUtils.fetchJson(url, options);
 };
 
-export default simpleDataProvider('http://localhost:8080', httpClient);
+export default simpleDataProvider('http://localhost:8080/admin', httpClient);
