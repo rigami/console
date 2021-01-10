@@ -14,6 +14,8 @@ import {
     SimpleForm,
     ShowButton,
     ListButton,
+    EmailField,
+    NumberField,
 } from 'react-admin';
 
 const PostFilter = (props) => (
@@ -54,8 +56,8 @@ const ListActions = (props) => {
 export const TestingRequestList = (props) => (
     <List {...props} exporter={false} actions={<ListActions />} filters={<PostFilter />}>
         <Datagrid>
-            <TextField source="id" />
-            <TextField source="email" />
+            <NumberField source="id" />
+            <EmailField source="email" />
             <TextField source="name" />
             <TextField source="reason" />
         </Datagrid>

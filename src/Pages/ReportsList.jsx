@@ -11,13 +11,15 @@ import {
     Filter,
     TextInput,
     SelectInput,
+    EmailField,
+    NumberField,
 } from 'react-admin';
 
 const PostFilter = (props) => (
     <Filter {...props}>
         <TextInput label="Search" source="q" alwaysOn />
         <SelectInput source="type" allowEmpty={false} choices={[
-            { id: 'all', name: 'All' },
+            { id: '', name: 'All' },
             { id: 'bug', name: 'Bug' },
             { id: 'review', name: 'Review' },
         ]} />
@@ -56,8 +58,8 @@ const ListActions = (props) => {
 export const ReportsList = (props) => (
     <List {...props} exporter={false} actions={<ListActions />} filters={<PostFilter />}>
         <Datagrid>
-            <TextField source="id" />
-            <TextField source="email" />
+            <NumberField source="id" />
+            <EmailField source="email" />
             <TextField source="text" />
             <TextField source="type" />
             <BooleanField source="commentable" />

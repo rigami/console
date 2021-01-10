@@ -3,7 +3,7 @@ import { Admin, Resource } from 'react-admin';
 import Layout from './Layout';
 import theme from "./Layout/theme";
 import Dashboard from "./Pages/Dashboard";
-import { BGCollectionsList } from "./Pages/BGCollections";
+import { BGCollectionsList, BGCollectionsCreate } from "./Pages/BGCollections";
 import { BGBlackList } from './Pages/BGBlackList';
 import { ReportsList } from './Pages/ReportsList';
 import { TestingRequestList, TestingRequestCreate } from './Pages/TestingRequestList';
@@ -43,6 +43,7 @@ function App() {
                 name="backgrounds/collections"
                 options={{ label: "Collections" }}
                 list={BGCollectionsList}
+                create={BGCollectionsCreate}
                 icon={BGCollectionsIcon}
             />
             <Resource
