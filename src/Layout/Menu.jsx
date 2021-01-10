@@ -13,18 +13,22 @@ import { ExpandLessRounded as ArrowUpIcon } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
     list: {
-        paddingRight: theme.spacing(2),
-        paddingTop: theme.spacing(2),
+        paddingRight: 0,
+        paddingTop: 0,
     },
     root: {
         borderTopRightRadius: theme.spacing(2.25),
         borderBottomRightRadius: theme.spacing(2.25),
+        paddingLeft: theme.spacing(3),
         // wordBreak: 'break-word',
         // whiteSpace: 'normal',
     },
     active: {
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.palette.secondary.light,
         color: theme.palette.secondary.contrastText,
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.light,
+        },
     },
 }));
 

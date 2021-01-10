@@ -4,7 +4,6 @@ const CustomSidebar = (props) => (
     <Sidebar
         {...props}
         userMenu={false}
-
     />
 );
 

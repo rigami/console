@@ -8,8 +8,8 @@ const theme = createMuiTheme({
         secondary: { main: '#FFE16B' },
     },
     sidebar: {
-        width: 240, // The default value is 240
-        closedWidth: 72, // The default value is 55
+        width: 272, // The default value is 240
+        closedWidth: 55, // The default value is 55
     },
     overrides: {
         MuiCssBaseline: {
@@ -30,17 +30,17 @@ const theme = createMuiTheme({
             'h5': {
                 fontSize: 18,
                 fontWeight: 'bold',
-                fontFamily: 'Ubuntu',
                 wordBreak: 'break-word',
             },
             'h4': {
                 fontSize: 32,
-                fontFamily: 'Source Sans Pro',
                 wordBreak: 'break-word',
+            },
+            'h6': {
+                fontWeight: 800,
             },
             'body1': {
                 fontSize: 16,
-                fontFamily: 'Source Sans Pro',
                 wordBreak: 'break-word',
             },
         },
@@ -53,8 +53,18 @@ const theme = createMuiTheme({
             },
         },
         MuiButton: { label: { wordBreak: 'break-word' } },
+        MuiTableCell: {
+            head: {
+                fontWeight: 600,
+            },
+        },
+        MuiMenuItem: {
+            root: {
+                fontWeight: 600,
+            },
+        },
     },
-    typography: { fontFamily: '"Red Hat Display", "Ubuntu", "Source Sans Pro", sans-serif' },
+    typography: { fontFamily: '"Manrope", sans-serif' },
     props: { MuiButton: { disableElevation: true } },
     shape: {
         borderRadius: 4,
