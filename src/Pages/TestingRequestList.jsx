@@ -3,17 +3,12 @@ import {
     List,
     Datagrid,
     TextField,
-    BooleanField,
     useListContext,
     TopToolbar,
     CreateButton,
     sanitizeListRestProps,
     Filter,
     TextInput,
-    Create,
-    SimpleForm,
-    ShowButton,
-    ListButton,
     EmailField,
     NumberField,
 } from 'react-admin';
@@ -62,21 +57,4 @@ export const TestingRequestList = (props) => (
             <TextField source="reason" />
         </Datagrid>
     </List>
-);
-
-const PostEditActions = ({ basePath, data, resource }) => (
-    <TopToolbar>
-        <ListButton basePath={basePath} record={data} />
-    </TopToolbar>
-);
-
-
-export const TestingRequestCreate = (props) => (
-    <Create {...props} title="Create request" actions={<PostEditActions />}>
-        <SimpleForm>
-            <TextInput source="email" />
-            <TextInput source="name" />
-            <TextInput source="reason" options={{ multiLine: true }} />
-        </SimpleForm>
-    </Create>
 );
