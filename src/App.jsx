@@ -4,7 +4,7 @@ import Layout from './Layout';
 import theme from "./Layout/theme";
 import Dashboard from "./Pages/Dashboard";
 import { BGCollectionsList, BGCollectionsCreate } from "./Pages/BGCollections";
-import { BGBlackList } from './Pages/BGBlackList';
+import { BGBlackListList, BGBlackListCreate } from './Pages/BGBlackList';
 import { ReportsList } from './Pages/ReportsList';
 import { TestingRequestList, TestingRequestCreate } from './Pages/TestingRequestList';
 import {
@@ -49,7 +49,8 @@ function App() {
             <Resource
                 name="backgrounds/black-list"
                 options={{ label: "Black list" }}
-                list={BGBlackList}
+                list={BGBlackListList}
+                create={BGBlackListCreate}
                 icon={BGBlackListIcon}
             />
         </Admin>

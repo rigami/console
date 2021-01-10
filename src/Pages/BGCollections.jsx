@@ -80,7 +80,6 @@ export const BGCollectionsList = (props) => (
             <TextField source="bgId" label="Id in service" />
             <TextField source="collection" />
             <TextField source="service" />
-            <TextField source="type" />
             <UrlField source="sourceLink" target="_blank" />
             <DateField source="addedAt" showTime />
         </Datagrid>
@@ -117,10 +116,6 @@ export const BGCollectionsCreate = (props) => (
                 { id: 'UNSPLASH', name: 'Unsplash' },
                 { id: 'PEXELS', name: 'Pexels' },
                 { id: 'PIXABAY', name: 'Pixabay' },
-            ]} />
-            <SelectInput source="type" allowEmpty={false} choices={[
-                { id: 'IMAGE', name: 'Image' },
-                { id: 'VIDEO', name: 'Video' },
             ]} />
         </SimpleForm>
     </Create>
