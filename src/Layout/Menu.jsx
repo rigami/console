@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { List, useMediaQuery, MenuItem, Link } from '@material-ui/core';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import {
     DashboardMenuItem,
     MenuItemLink,
-    getResources,
+    getResources, setSidebarVisibility,
 } from 'react-admin';
 import SubMenu from './SubMenu';
 import { capitalize, first } from 'lodash';
@@ -80,15 +80,14 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
     const isXSmall = useMediaQuery((theme) =>
         theme.breakpoints.down('xs')
     );
-    const open = useSelector((state) => state.admin.ui.sidebarOpen);
-
     const resources = useSelector(getResources);
 
     return (
         <List dense={false} className={classes.list}>
             <DashboardMenuItem
                 onClick={onMenuClick}
-                sidebarIsOpen={open} classes={{ root: classes.root, active: classes.active }}
+                classes={{ root: classes.root, active: classes.active }}
+                sidebarIsOpen
             />
             {resources.reduce((arr, item) => {
                 if (item.name.indexOf("/") !== -1) {
@@ -118,7 +117,7 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                             dense={dense}
                             onMenuClick={onMenuClick}
                             resources={item.resources}
-                            sidebarIsOpen={open}
+                            sidebarIsOpen
                         />
                     );
                 } else {
@@ -129,7 +128,7 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                             primaryText={item.options?.label || item.name}
                             onClick={onMenuClick}
                             leftIcon={item.icon && <item.icon />}
-                            sidebarIsOpen={open}
+                            sidebarIsOpen
                             dense={dense}
                             classes={{ root: classes.root, active: classes.active }}
                         />
@@ -137,7 +136,7 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                 }
             })}
             <SubMenu
-                sidebarIsOpen={open}
+                sidebarIsOpen
                 name="Hotlinks"
                 dense={dense}
                 classes={{ root: classes.root, active: classes.subMenuActive }}
@@ -156,7 +155,7 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                         target="_blank"
                         component={Link}
                         color="textSecondary"
-                        sidebarIsOpen={open}
+                        sidebarIsOpen
                         dense={dense}
                         classes={{ root: classes.root, active: classes.active }}
                     >

@@ -3,7 +3,7 @@ import AppBar from './AppBar';
 import Sidebar from './Sidebar';
 import Menu from './Menu';
 import CustomNotification from './Notification';
-import {Box, MuiThemeProvider} from "@material-ui/core";
+import {Box, MuiThemeProvider, useMediaQuery} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from "react-redux";
 import { setSidebarVisibility } from "react-admin";
@@ -42,27 +42,40 @@ function Layout(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const open = useSelector(state => state.admin.ui.sidebarOpen);
+    const isXSmall = useMediaQuery((currTheme) =>
+        currTheme.breakpoints.down('xs')
+    );
 
     useEffect(() => {
-        dispatch(setSidebarVisibility(true));
+        if (!isXSmall) {
+            dispatch(setSidebarVisibility(true));
+        }
     }, [setSidebarVisibility]);
 
     return (
-        <MuiThemeProvider theme={theme}>
-            <Box className={classes.root}>
-                <AppBar title={title} open={open} logout={logout} />
-                <main className={classes.contentWithSidebar}>
+        <Box className={classes.root}>
+            <AppBar title={title} open={open} logout={logout} />
+            <main className={classes.contentWithSidebar}>
+                {(!isXSmall && open || isXSmall) && (
                     <Sidebar>
                         <Menu logout={logout} hasDashboard={!!dashboard} />
                     </Sidebar>
-                    <Box className={classes.content}>
-                        {children}
-                    </Box>
-                </main>
-                <CustomNotification />
-            </Box>
+                )}
+                <Box className={classes.content}>
+                    {children}
+                </Box>
+            </main>
+            <CustomNotification />
+        </Box>
+    );
+}
+
+function ThemingLayout(props) {
+    return (
+        <MuiThemeProvider theme={theme}>
+            <Layout {...props} />
         </MuiThemeProvider>
     );
 }
 
-export default Layout;
+export default ThemingLayout;
