@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, {Fragment, useState} from 'react';
 import {
     ArrowRightRounded as ExpandMoreIcon,
     ArrowDropDownRounded as ExpandLessIcon,
@@ -42,9 +42,8 @@ const useStyles = makeStyles(theme => ({
 const SubMenu = (props) => {
     const {
         active,
-        handleToggle,
         sidebarIsOpen,
-        isOpen,
+        isOpen: defaultIsOpen = false,
         name,
         icon,
         children,
@@ -53,12 +52,13 @@ const SubMenu = (props) => {
     } = props;
     const translate = useTranslate();
     const classes = useStyles();
+    const [isOpen, setIsOpen] = useState(defaultIsOpen);
 
     const header = (
         <MenuItem
             dense={dense}
             button
-            onClick={handleToggle}
+            onClick={() => setIsOpen(!isOpen)}
             className={clsx(externalClasses.root, active && externalClasses.active)}
         >
             {!isOpen ? (
@@ -88,7 +88,7 @@ const SubMenu = (props) => {
                     {header}
                 </Tooltip>
             )}
-            <Collapse in={isOpen} timeout="auto" unmountOnExit={false} className={classes.collapse}>
+            <Collapse in={isOpen} timeout="auto" unmountOnExit className={classes.collapse}>
                 <List
                     dense={dense}
                     component="div"

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import {List, useMediaQuery} from '@material-ui/core';
+import { List, useMediaQuery, MenuItem, Link } from '@material-ui/core';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import {
     DashboardMenuItem,
@@ -19,11 +19,12 @@ const useStyles = makeStyles((theme) => ({
         borderTopRightRadius: theme.spacing(2.25),
         borderBottomRightRadius: theme.spacing(2.25),
         paddingLeft: theme.spacing(3),
-        // wordBreak: 'break-word',
-        // whiteSpace: 'normal',
+        wordBreak: 'break-word',
+        whiteSpace: 'normal',
         fontSize: '.875rem',
         letterSpacing: '.0178571429em',
         lineHeight: '1.25rem',
+        minHeight: theme.spacing(4.5),
     },
     active: {
         backgroundColor: fade(theme.palette.primary.light, 0.12),
@@ -45,16 +46,13 @@ const useStyles = makeStyles((theme) => ({
 
 function TreeMenu({ sidebarIsOpen, onMenuClick, resources, dense, name }) {
     const classes = useStyles();
-    const [isOpen, setIsOpen] = useState(false);
 
     const GroupIcon = first(resources)?.options?.groupIcon;
     const isActive = !!resources.find(({ name }) => window.location.hash === `#/${name}`)
 
     return (
         <SubMenu
-            handleToggle={() => setIsOpen(!isOpen)}
             active={isActive}
-            isOpen={isOpen}
             sidebarIsOpen={sidebarIsOpen}
             name={name}
             dense={dense}
@@ -138,6 +136,34 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                     );
                 }
             })}
+            <SubMenu
+                sidebarIsOpen={open}
+                name="Hotlinks"
+                dense={dense}
+                classes={{ root: classes.root, active: classes.subMenuActive }}
+            >
+                {[
+                    { url: "https://rigami.io/", label: "Landing page" },
+                    {
+                        url: "https://chrome.google.com/webstore/detail/rigami-new-tab/hdpjmahlkfndaejogipnepcgdmjiamhd",
+                        label: "Google chrome store",
+                    },
+                    { url: "https://traefik.rigami.io/", label: "Traefik admin panel" },
+                ].map((item) => (
+                    <MenuItem
+                        key={item.url}
+                        href={item.url}
+                        target="_blank"
+                        component={Link}
+                        color="textSecondary"
+                        sidebarIsOpen={open}
+                        dense={dense}
+                        classes={{ root: classes.root, active: classes.active }}
+                    >
+                        {item.label || item.url}
+                    </MenuItem>
+                ))}
+            </SubMenu>
             {isXSmall && logout}
         </List>
     );
