@@ -4,8 +4,8 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
     ...defaultTheme,
     palette: {
-        primary: { main: '#62B9FE' },
-        secondary: { main: '#FFE16B' },
+        primary: { main: '#1967d2' },
+        secondary: { main: '#D48E15' },
     },
     sidebar: {
         width: 272, // The default value is 240

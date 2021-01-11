@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { List, useMediaQuery } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import {List, useMediaQuery} from '@material-ui/core';
+import { makeStyles, fade } from '@material-ui/core/styles';
 import {
     DashboardMenuItem,
     MenuItemLink,
     getResources,
 } from 'react-admin';
 import SubMenu from './SubMenu';
-import { capitalize } from 'lodash';
-import { ExpandLessRounded as ArrowUpIcon } from "@material-ui/icons";
+import { capitalize, first } from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
     list: {
@@ -22,12 +21,24 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: theme.spacing(3),
         // wordBreak: 'break-word',
         // whiteSpace: 'normal',
+        fontSize: '.875rem',
+        letterSpacing: '.0178571429em',
+        lineHeight: '1.25rem',
     },
     active: {
-        backgroundColor: theme.palette.secondary.light,
-        color: theme.palette.secondary.contrastText,
+        backgroundColor: fade(theme.palette.primary.light, 0.12),
+        color: theme.palette.primary.main,
         '&:hover': {
-            backgroundColor: theme.palette.secondary.light,
+            backgroundColor: fade(theme.palette.primary.light, 0.12),
+        },
+        '& svg': {
+            color: theme.palette.primary.main,
+        },
+    },
+    subMenuActive: {
+        color: theme.palette.primary.main,
+        '& svg': {
+            color: theme.palette.primary.main,
         },
     },
 }));
@@ -36,14 +47,19 @@ function TreeMenu({ sidebarIsOpen, onMenuClick, resources, dense, name }) {
     const classes = useStyles();
     const [isOpen, setIsOpen] = useState(false);
 
+    const GroupIcon = first(resources)?.options?.groupIcon;
+    const isActive = !!resources.find(({ name }) => window.location.hash === `#/${name}`)
+
     return (
         <SubMenu
             handleToggle={() => setIsOpen(!isOpen)}
+            active={isActive}
             isOpen={isOpen}
             sidebarIsOpen={sidebarIsOpen}
-            icon={<ArrowUpIcon/>}
             name={name}
             dense={dense}
+            classes={{ root: classes.root, active: classes.subMenuActive }}
+            icon={GroupIcon && <GroupIcon />}
         >
             {resources.map((item) => (
                 <MenuItemLink

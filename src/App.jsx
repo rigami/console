@@ -8,6 +8,7 @@ import { BGBlackListList, BGBlackListCreate } from './Pages/BGBlackList';
 import { ReportsList } from './Pages/ReportsList';
 import { TestingRequestList } from './Pages/TestingRequestList';
 import {
+    PhotoRounded as BGIcon,
     CollectionsRounded as BGCollectionsIcon,
     BlockRounded as BGBlackListIcon,
     BugReportRounded as BugReportIcon,
@@ -40,7 +41,7 @@ function App() {
             />
             <Resource
                 name="backgrounds/collections"
-                options={{ label: "Collections" }}
+                options={{ label: "Collections", groupIcon: BGIcon }}
                 list={BGCollectionsList}
                 create={BGCollectionsCreate}
                 icon={BGCollectionsIcon}
