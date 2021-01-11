@@ -1,12 +1,8 @@
-import React, {cloneElement} from "react";
+import React from "react";
 import {
     List,
     Datagrid,
     TextField,
-    useListContext,
-    TopToolbar,
-    CreateButton,
-    sanitizeListRestProps,
     Filter,
     TextInput,
     EmailField,
@@ -19,37 +15,8 @@ const PostFilter = (props) => (
     </Filter>
 );
 
-const ListActions = (props) => {
-    const {
-        className,
-        exporter,
-        filters,
-        maxResults,
-        ...rest
-    } = props;
-    const {
-        resource,
-        displayedFilters,
-        filterValues,
-        basePath,
-        showFilter,
-    } = useListContext();
-    return (
-        <TopToolbar className={className} {...sanitizeListRestProps(rest)}>
-            {filters && cloneElement(filters, {
-                resource,
-                showFilter,
-                displayedFilters,
-                filterValues,
-                context: 'button',
-            })}
-            <CreateButton basePath={basePath} />
-        </TopToolbar>
-    );
-};
-
 export const TestingRequestList = (props) => (
-    <List {...props} exporter={false} actions={<ListActions />} filters={<PostFilter />}>
+    <List {...props} exporter={false} filters={<PostFilter />}>
         <Datagrid>
             <NumberField source="id" />
             <EmailField source="email" />
