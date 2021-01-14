@@ -7,11 +7,6 @@ Admin panel for rigami project
 $ yarn dev
 ```
 
-## Build
-```bash
-$ yarn dev
-```
-
 ## Release
 ```bash
 $ yarn release
