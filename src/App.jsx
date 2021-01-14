@@ -16,12 +16,14 @@ import {
 } from "@material-ui/icons";
 import i18nProvider from './i18nProvider';
 import dataProvider from './dataProvider';
+import authProvider from './authProvider';
 
 function App() {
     return (
         <Admin
             theme={theme}
             layout={Layout}
+            authProvider={authProvider}
             dataProvider={dataProvider}
             i18nProvider={i18nProvider}
             dashboard={Dashboard}
