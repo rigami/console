@@ -6,8 +6,6 @@ services:
   admin-panel:
     build: .
     restart: unless-stopped
-    ports:
-      - 80:80
     networks:
       - web
     labels:
