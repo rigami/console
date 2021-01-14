@@ -1,13 +1,26 @@
 {
   "name": "admin-panel",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "private": true,
   "scripts": {
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "release": "git tag -a v$npm_package_version && git push --tags",
+    "bump": "yarn bump:patch",
+    "bump:patch": "yarn version --patch --no-commit --no-git-tag-version && git add ./package.json",
+    "bump:minor": "yarn version --minor --no-commit --no-git-tag-version && git add ./package.json",
+    "bump:major": "yarn version --major --no-commit --no-git-tag-version && git add ./package.json"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "git-branch-is --not master && yarn bump:patch || echo 'skip set version'"
+    }
+  },
+  "repository": "https://github.com/rigami/admin-panel",
+  "author": "Danilkinkin <Danilkinkin@gmail.com>",
+  "license": "ISC",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -45,5 +58,9 @@
     "react-redux": "^7.2.2",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
+  },
+  "devDependencies": {
+    "husky": "^4.3.0",
+    "git-branch-is": "^4.0.0"
   }
 }

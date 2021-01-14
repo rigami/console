@@ -14,7 +14,11 @@ const httpClient = (url, options = {}) => {
     } catch (e) {
     }
 
-    options.headers.set('Authorization', `Bearer ${token}`);
+    options.user = {
+        authenticated: true,
+        token: `Bearer ${token}`,
+    };
+
     return fetchUtils.fetchJson(url, options);
 };
 
