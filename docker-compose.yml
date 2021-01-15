@@ -3,15 +3,15 @@ networks:
   web:
     external: true
 services:
-  console:
+  admin-panel:
     build: .
     restart: unless-stopped
     networks:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.console.rule=Host(`console.rigami.io`)"
-      - "traefik.http.routers.console.entrypoints=web-http,web-https"
-      - "traefik.http.routers.console.tls=true"
-      - "traefik.http.routers.console.tls.certresolver=letsEncrypt"
-      - "traefik.http.services.console-service.loadbalancer.server.port=80"
+      - "traefik.http.routers.admin-panel.rule=Host(`console.rigami.io`)"
+      - "traefik.http.routers.admin-panel.entrypoints=web-http,web-https"
+      - "traefik.http.routers.admin-panel.tls=true"
+      - "traefik.http.routers.admin-panel.tls.certresolver=letsEncrypt"
+      - "traefik.http.services.admin-panel-service.loadbalancer.server.port=80"
