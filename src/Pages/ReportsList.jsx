@@ -1,4 +1,4 @@
-import React, {cloneElement} from "react";
+import React, { cloneElement, Fragment } from "react";
 import {
     List,
     Datagrid,
@@ -13,7 +13,10 @@ import {
     SelectInput,
     EmailField,
     NumberField,
+    BulkDeleteButton,
 } from 'react-admin';
+import BulkUpdateButton from '../components/BulkUpdateButton';
+import UpdateButton from "../components/UpdateButton";
 
 const PostFilter = (props) => (
     <Filter {...props}>
@@ -55,14 +58,40 @@ const ListActions = (props) => {
     );
 };
 
+const PostBulkActionButtons = props => (
+    <Fragment>
+        <BulkUpdateButton label='Mark as processed' updateData={{ processed: true }} {...props} />
+        <BulkUpdateButton label='Mark as not processed' updateData={{ processed: false }} {...props} />
+        <BulkDeleteButton {...props} />
+    </Fragment>
+);
+
+function ActionsField({ record, ...props }) {
+    return (
+        <UpdateButton
+            label={record.processed ? "Mark as not processed" : "Mark as processed"}
+            record={record}
+            updateData={{ processed: !record.processed }}
+            {...props}
+        />
+    );
+}
+
 export const ReportsList = (props) => (
-    <List {...props} exporter={false} actions={<ListActions />} filters={<PostFilter />}>
+    <List
+        {...props}
+        exporter={false}
+        actions={<ListActions />}
+        filters={<PostFilter />}
+        bulkActionButtons={<PostBulkActionButtons />}
+    >
         <Datagrid>
             <NumberField source="id" />
             <EmailField source="email" />
             <TextField source="text" />
             <TextField source="type" />
-            <BooleanField source="commentable" />
+            <BooleanField source="processed" />
+            <ActionsField />
         </Datagrid>
     </List>
 );

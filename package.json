@@ -1,6 +1,6 @@
 {
   "name": "admin-panel",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "private": true,
   "scripts": {
     "dev": "react-scripts start",
@@ -60,7 +60,7 @@
     "web-vitals": "^0.2.4"
   },
   "devDependencies": {
-    "husky": "^4.3.0",
-    "git-branch-is": "^4.0.0"
+    "git-branch-is": "^4.0.0",
+    "husky": "^4.3.0"
   }
 }
