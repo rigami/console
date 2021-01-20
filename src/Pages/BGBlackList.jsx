@@ -69,6 +69,7 @@ export const BGBlackListList = (props) => (
         <Datagrid>
             <TextField source="bgId" label="Id in service" />
             <TextField source="service" />
+            <TextField source="entityType" />
             <UrlField source="sourceLink" target="_blank" />
             <DateField source="addedAt" showTime />
         </Datagrid>
@@ -101,6 +102,10 @@ export const BGBlackListCreate = (props) => (
                 { id: 'UNSPLASH', name: 'Unsplash' },
                 { id: 'PEXELS', name: 'Pexels' },
                 { id: 'PIXABAY', name: 'Pixabay' },
+            ]} />
+            <SelectInput source="entityType" allowEmpty={false} choices={[
+                { id: 'PUBLISHER', name: 'Publisher' },
+                { id: 'BACKGROUND', name: 'Background' },
             ]} />
         </SimpleForm>
     </Create>
