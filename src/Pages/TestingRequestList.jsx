@@ -29,7 +29,7 @@ const PostBulkActionButtons = props => (
 
 function ActionsField({ record, ...props }) {
     if (!record) return null;
-    
+
     return (
         <UpdateButton
             label={record.processed ? "Mark as not processed" : "Mark as processed"}
