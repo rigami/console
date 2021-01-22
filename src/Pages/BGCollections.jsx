@@ -18,6 +18,14 @@ import {
     Toolbar,
     SaveButton,
 } from 'react-admin';
+import {Box, Divider, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+    margin: {
+        margin: theme.spacing(2, 0),
+    },
+}));
 
 const PostFilter = (props) => (
     <Filter {...props}>
@@ -102,10 +110,36 @@ const PostCreateToolbar = props => (
     </Toolbar>
 );
 
+function ExampleCreateRow() {
+    const classes = useStyles();
+
+    return (
+        <Box>
+            <Typography variant="h5">Examples</Typography>
+            <Typography>
+                <Typography variant="span" color="textSecondary">Unsplash: </Typography>
+                https://unsplash.com/photos/<Typography variant="span" color="secondary">nL1pAWmRFYU</Typography>
+            </Typography>
+            <Typography>
+                <Typography variant="span" color="textSecondary">Pexels: </Typography>
+                https://www.pexels.com/video/silhouette-of-maple-leaves-<Typography variant="span" color="secondary">1510090</Typography>/
+            </Typography>
+            <Typography>
+                <Typography variant="span" color="textSecondary">Pixabay: </Typography>
+                https://pixabay.com/videos/nature-rain-plant-water-garden-<Typography variant="span" color="secondary">42420</Typography>/
+            </Typography>
+            <Divider className={classes.margin} />
+        </Box>
+    );
+}
+
+
 
 export const BGCollectionsCreate = (props) => (
     <Create {...props} title="Add background to collection" actions={<PostEditActions />}>
         <SimpleForm toolbar={<PostCreateToolbar />}>
+            <ExampleCreateRow />
+            <Typography variant="h5">Add row</Typography>
             <TextInput source="bgId" label="Id in service" />
             <TextInput source="sourceLink" />
             <SelectInput source="collection" allowEmpty={false} choices={[
