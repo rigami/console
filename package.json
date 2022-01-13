@@ -1,6 +1,6 @@
 {
   "name": "console",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.3",
@@ -26,9 +26,10 @@
     "eject": "react-scripts eject",
     "release": "git tag -a v$npm_package_version && git push --tags",
     "bump": "yarn bump:patch",
-    "bump:patch": "yarn version --patch --no-commit --no-git-tag-version && git add ./package.json",
-    "bump:minor": "yarn version --minor --no-commit --no-git-tag-version && git add ./package.json",
-    "bump:major": "yarn version --major --no-commit --no-git-tag-version && git add ./package.json",
+    "bump:patch": "yarn version patch && git add ./package.json",
+    "bump:minor": "yarn version minor && git add ./package.json",
+    "bump:major": "yarn version major && git add ./package.json",
+    "bump:premajor": "yarn version prerelease && git add ./package.json",
     "prepare": "husky install"
   },
   "repository": "https://github.com/rigami/console",
