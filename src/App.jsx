@@ -5,8 +5,6 @@ import theme from "./Layout/theme";
 import Dashboard from "./Pages/Dashboard";
 import { BGCollectionsList, BGCollectionsCreate } from "./Pages/BGCollections";
 import { BGBlackListList, BGBlackListCreate } from './Pages/BGBlackList';
-import { ReportsList } from './Pages/ReportsList';
-import { TestingRequestList } from './Pages/TestingRequestList';
 import {
     PhotoRounded as BGIcon,
     CollectionsRounded as BGCollectionsIcon,
@@ -29,18 +27,6 @@ function App() {
             dashboard={Dashboard}
             disableTelemetry
         >
-            <Resource
-                name="testing-request"
-                options={{ label: "Testing request" }}
-                list={TestingRequestList}
-                icon={TestingRequestIcon}
-            />
-            <Resource
-                name="reports"
-                options={{ label: "Reports" }}
-                list={ReportsList}
-                icon={BugReportIcon}
-            />
             <Resource
                 name="backgrounds/collections"
                 options={{ label: "Collections", groupIcon: BGIcon }}

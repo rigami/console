@@ -1,7 +1,7 @@
 import { defaultTheme } from "react-admin";
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
+const theme = createTheme({
     ...defaultTheme,
     palette: {
         primary: { main: '#1967d2' },

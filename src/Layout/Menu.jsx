@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { List, useMediaQuery, MenuItem, Link } from '@material-ui/core';
-import { makeStyles, fade } from '@material-ui/core/styles';
+import { makeStyles, alpha } from '@material-ui/core/styles';
 import {
     DashboardMenuItem,
     MenuItemLink,
@@ -27,10 +27,10 @@ const useStyles = makeStyles((theme) => ({
         minHeight: theme.spacing(4.5),
     },
     active: {
-        backgroundColor: fade(theme.palette.primary.light, 0.12),
+        backgroundColor: alpha(theme.palette.primary.light, 0.12),
         color: theme.palette.primary.main,
         '&:hover': {
-            backgroundColor: fade(theme.palette.primary.light, 0.12),
+            backgroundColor: alpha(theme.palette.primary.light, 0.12),
         },
         '& svg': {
             color: theme.palette.primary.main,
