@@ -18,9 +18,18 @@ import {
     Toolbar,
     SaveButton, BulkDeleteButton,
 } from 'react-admin';
-import {Box, Divider, Typography} from "@material-ui/core";
+import {Box, Breadcrumbs, CardMedia, Divider, Link, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import { CollectionCreate } from './Create';
+
+const useStyles = makeStyles((theme) => ({
+    previewCard: {
+        width: 237,
+        height: 160,
+        borderRadius: theme.shape.borderRadius,
+        marginRight: theme.spacing(2)
+    },
+}));
 
 const PostFilter = (props) => (
     <Filter {...props}>
@@ -83,16 +92,35 @@ const PostBulkActionButtons = props => (
     </Fragment>
 );
 
+const Wallpaper = ({ record, ...props }) => {
+    const classes = useStyles();
 
+    console.log(record, props)
+
+    return (
+        <Box display="flex" flexDirection="row">
+            <Link href={record.sourceLink} target="_blank">
+                <CardMedia image={record.previewSrc} className={classes.previewCard} />
+            </Link>
+            <Box>
+                <Link href={record.sourceLink} target="_blank">
+                    <Breadcrumbs>
+                        <Typography variant="inherit" component="span" color="textPrimary">{record.service}</Typography>
+                        <Typography variant="inherit" component="span" color="textPrimary">{record.type}</Typography>
+                        <Typography variant="inherit" component="span" color="primary">{record.idInService}</Typography>
+                    </Breadcrumbs>
+                </Link>
+                <Typography variant="caption" color="textSecondary">id:{record.id}</Typography>
+            </Box>
+        </Box>
+    );
+}
 
 export const CollectionsList = (props) => (
     <List {...props} exporter={false} actions={<ListActions />} filters={<PostFilter />} bulkActionButtons={<PostBulkActionButtons />}>
         <Datagrid>
-            <TextField source="id" />
-            <TextField source="idInService" label="Id in service" />
+            <Wallpaper />
             <TextField source="collectionType" />
-            <TextField source="service" />
-            <UrlField source="sourceLink" target="_blank" />
             <DateField source="addedAt" showTime />
         </Datagrid>
     </List>
