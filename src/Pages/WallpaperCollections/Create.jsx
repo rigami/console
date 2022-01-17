@@ -1,7 +1,8 @@
-import {Create, ListButton, SaveButton, SelectInput, SimpleForm, TextInput, Toolbar, TopToolbar, required, CreateContextProvider, useCreateController} from "react-admin";
+import {Create, ListButton, SaveButton, SelectInput, SimpleForm, TextInput, Toolbar, TopToolbar, required, CreateContextProvider, useCreateController, FormGroupContextProvider} from "react-admin";
 import {Box, Divider, Typography} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
+import { useFormState, useForm, useField } from 'react-final-form';
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -15,15 +16,14 @@ const PostEditActions = ({ basePath, data, resource }) => (
     </TopToolbar>
 );
 
-const PostCreateToolbar = props => {
-
-    console.log('PostCreateToolbar:', props)
+const PostCreateToolbar = ({ disabledSave, ...props }) => {
 
     return (
         <Toolbar {...props} >
             <SaveButton
                 label="Save and add"
                 redirect="show"
+                disabled={disabledSave}
                 submitOnEnter={true}
             />
         </Toolbar>
@@ -52,8 +52,42 @@ function ExampleCreateRow() {
     );
 }
 
+const EditableFormContent = ({ children, mutationOnChange }) => {
+    const form = useForm();
+
+    useEffect(() => {
+        if (mutationOnChange && form) {
+            let prevState;
+
+            const subscribes = Object.keys(mutationOnChange).map((key) => {
+                return form.subscribe((state) => {
+
+                    mutationOnChange[key](form, state.values, prevState);
+
+                    prevState = state.values;
+                }, { [key]: true });
+            });
+
+            return () => subscribes.forEach((unsub) => unsub());
+        }
+    }, [form])
+
+    return children;
+}
+
+
+const EditableForm = ({ children, mutationOnChange, ...props }) => {
+    return (
+        <SimpleForm {...props}>
+            <EditableFormContent mutationOnChange={mutationOnChange}>
+                {children}
+            </EditableFormContent>
+        </SimpleForm>
+    );
+}
+
 export const CollectionCreate = (props) => {
-    const [parsedLink, setParsedLink] = useState({});
+    const [allowSave, setAllowSave] = useState(false);
 
     const parseLink = (sourceLink) => {
         let service;
@@ -89,12 +123,12 @@ export const CollectionCreate = (props) => {
             idInService = idInService.substring(0, idInService.length - 1)
         }
 
-        setParsedLink({
+        return {
             sourceLink,
             service,
             type,
             idInService,
-        })
+        }
     }
 
     return (
@@ -104,50 +138,77 @@ export const CollectionCreate = (props) => {
             aside={<ExampleCreateRow />}
             actions={<PostEditActions />}
         >
-            <SimpleForm toolbar={<PostCreateToolbar />}>
-                <Typography variant="h5">Add wallpaper in collection</Typography>
-                <TextInput
-                    source="sourceLink"
-                    validate={required()}
-                    onChange={(event) => parseLink(event.currentTarget.value)}
-                />
-                <TextInput
-                    source="idInService"
-                    label="Id in service"
-                    validate={required()}
-                    format={() => parsedLink.idInService || ''}
-                />
-                <SelectInput
-                    source="type"
-                    allowEmpty={false}
-                    validate={required()}
-                    format={() => parsedLink.type || ''}
-                    choices={[
-                        { id: 'image', name: 'Image' },
-                        { id: 'video', name: 'Video' },
-                    ]}
-                />
-                <SelectInput
-                    source="service"
-                    allowEmpty={false}
-                    validate={required()}
-                    format={() => parsedLink.service || ''}
-                    choices={[
-                        { id: 'unsplash', name: 'Unsplash' },
-                        { id: 'pexels', name: 'Pexels' },
-                        { id: 'pixabay', name: 'Pixabay' },
-                    ]}
-                />
-                <SelectInput
-                    source="collectionType"
-                    allowEmpty={false}
-                    validate={required()}
-                    choices={[
-                        { id: 'default', name: 'Default' },
-                        { id: 'best', name: 'Best' },
-                    ]}
-                />
-            </SimpleForm>
+            <EditableForm
+                toolbar={(
+                    <PostCreateToolbar
+                        disabledSave={!allowSave}
+                    />
+                )}
+                mutationOnChange={{
+                    values: (form, state, prevState) => {
+                        if (state.sourceLink !== prevState?.sourceLink) {
+                            const parsedLink = parseLink(state.sourceLink || '');
+
+                            form.batch(() => {
+                                form.change('service', parsedLink.service);
+                                form.change('type', parsedLink.type);
+                                form.change('idInService', parsedLink.idInService);
+                            });
+
+
+                            setAllowSave(
+                                !!parsedLink.sourceLink
+                                && !!parsedLink.idInService
+                                && !!parsedLink.type
+                                && !!parsedLink.service
+                                && !!state.collectionType
+                            );
+                        } else {
+                            setAllowSave(
+                                !!state.sourceLink
+                                && !!state.idInService
+                                && !!state.type
+                                && !!state.service
+                                && !!state.collectionType
+                            );
+                        }
+                    }
+                }}
+            >
+                <Box display="flex" flexDirection="column" maxWidth={360}>
+                    <Typography variant="h5">Add wallpaper in collection</Typography>
+                    <TextInput source="sourceLink" />
+                    <SelectInput
+                        source="service"
+                        allowEmpty={false}
+                        choices={[
+                            { id: 'unsplash', name: 'Unsplash' },
+                            { id: 'pexels', name: 'Pexels' },
+                            { id: 'pixabay', name: 'Pixabay' },
+                        ]}
+                    />
+                    <SelectInput
+                        source="type"
+                        allowEmpty={false}
+                        choices={[
+                            { id: 'image', name: 'Image' },
+                            { id: 'video', name: 'Video' },
+                        ]}
+                    />
+                    <TextInput
+                        source="idInService"
+                        label="Id in service"
+                    />
+                    <SelectInput
+                        source="collectionType"
+                        allowEmpty={false}
+                        choices={[
+                            { id: 'default', name: 'Default' },
+                            { id: 'best', name: 'Best' },
+                        ]}
+                    />
+                </Box>
+            </EditableForm>
         </Create>
     );
 };
