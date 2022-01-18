@@ -117,11 +117,18 @@ const Wallpaper = ({ record, ...props }) => {
 }
 
 export const CollectionsList = (props) => (
-    <List {...props} exporter={false} actions={<ListActions />} filters={<PostFilter />} bulkActionButtons={<PostBulkActionButtons />}>
+    <List
+        {...props}
+        exporter={false}
+        actions={<ListActions />}
+        filters={<PostFilter />}
+        bulkActionButtons={<PostBulkActionButtons />}
+        sort={{ field: 'createDate', order: 'DESC' }}
+    >
         <Datagrid>
-            <Wallpaper />
+            <Wallpaper source="wallpaper" sortable={false} />
             <TextField source="collectionType" />
-            <DateField source="addedAt" showTime />
+            <DateField source="createDate" showTime />
         </Datagrid>
     </List>
 );
