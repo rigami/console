@@ -1,12 +1,14 @@
+import { Fragment } from "react";
 import { AppBar } from 'react-admin';
-import { makeStyles } from '@material-ui/core/styles';
+import {alpha, makeStyles} from '@material-ui/core/styles';
 import { ReactComponent as Logo } from '../images/logo-header.svg';
 import theme from "./theme";
 
 const useStyles = makeStyles({
     root: {
         boxShadow: 'none',
-        backgroundColor: 'unset',
+        backdropFilter: 'blur(16px)',
+        backgroundColor: alpha(theme.palette.background.default, 0.38)
     },
     logo: {
         height: 36,
@@ -34,10 +36,11 @@ const CustomAppBar = (props) => {
             {...props}
             color="transparent"
             className={classes.root}
-            position="relative"
+            position="sticky"
             classes={{
                 toolbar: classes.toolbar,
             }}
+            container={Fragment}
         >
             <Logo className={classes.logo} />
             <span className={classes.spacer} />
