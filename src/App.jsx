@@ -5,7 +5,7 @@ import theme from "./Layout/theme";
 import LoginPage from "./Pages/LoginPage";
 import Dashboard from "./Pages/Dashboard";
 import { CollectionsList, CollectionCreate } from "./Pages/WallpaperCollections";
-import { BGBlackListList, BGBlackListCreate } from './Pages/BGBlackList';
+import { BlackListList, BlackListCreate } from './Pages/WallpaperBlackList';
 import {
     PhotoRounded as BGIcon,
     CollectionsRounded as BGCollectionsIcon,
@@ -37,8 +37,8 @@ function App() {
             <Resource
                 name="wallpapers/black-list"
                 options={{ label: "Black list" }}
-                list={BGBlackListList}
-                create={BGBlackListCreate}
+                list={BlackListList}
+                create={BlackListCreate}
                 icon={BGBlackListIcon}
             />
         </Admin>
