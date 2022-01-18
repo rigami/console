@@ -103,14 +103,16 @@ const Wallpaper = ({ record, ...props }) => {
                 <CardMedia image={record.previewSrc} className={classes.previewCard} />
             </Link>
             <Box>
-                <Link href={record.sourceLink} target="_blank">
-                    <Breadcrumbs>
-                        <Typography variant="inherit" component="span" color="textPrimary">{record.service}</Typography>
-                        <Typography variant="inherit" component="span" color="textPrimary">{record.type}</Typography>
-                        <Typography variant="inherit" component="span" color="primary">{record.idInService}</Typography>
-                    </Breadcrumbs>
-                </Link>
-                <Typography variant="caption" color="textSecondary">id:{record.id}</Typography>
+                <Typography variant="h5" color="textPrimary" gutterBottom>{record.type}</Typography>
+                <Typography variant="body2" color="textPrimary">
+                    <Typography variant="inherit" component="span" color="textSecondary">idInService: </Typography>
+                    {record.idInService}
+                </Typography>
+                <Typography variant="body1" color="textPrimary" gutterBottom>
+                    <Typography variant="inherit" component="span" color="textSecondary">service: </Typography>
+                    {record.service}
+                </Typography>
+                <Typography variant="caption" color="textSecondary">id: {record.id}</Typography>
             </Box>
         </Box>
     );
