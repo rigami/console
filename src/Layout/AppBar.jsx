@@ -26,6 +26,10 @@ const useStyles = makeStyles({
     toolbar: {
         minHeight: theme.spacing(8),
     },
+    menuButton: {
+        marginLeft: theme.spacing(1.5),
+        marginRight: theme.spacing(1.5),
+    },
 });
 
 const CustomAppBar = (props) => {
@@ -39,6 +43,7 @@ const CustomAppBar = (props) => {
             position="sticky"
             classes={{
                 toolbar: classes.toolbar,
+                menuButton: classes.menuButton,
             }}
             container={Fragment}
         >
