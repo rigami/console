@@ -4,8 +4,16 @@ import { createTheme } from '@material-ui/core/styles';
 const theme = createTheme({
     ...defaultTheme,
     palette: {
-        primary: { main: '#1967d2' },
-        secondary: { main: '#D48E15' },
+        primary: {
+            light: '#28DEC8',
+            main: '#49C5B6',
+            dark: '#299286',
+            contrastText: '#fff',
+        },
+        secondary: {
+            main: '#3386E4',
+            contrastText: '#fff',
+        },
     },
     sidebar: {
         width: 272, // The default value is 240
@@ -22,8 +30,12 @@ const theme = createTheme({
             },
         },
         MuiTypography: {
+            'h1': {
+                fontWeight: 800,
+                wordBreak: 'break-word',
+            },
             'h2': {
-                fontWeight: 600,
+                fontWeight: 800,
                 wordBreak: 'break-word',
             },
             'h3': { wordBreak: 'break-word' },
