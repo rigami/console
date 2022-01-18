@@ -2,6 +2,7 @@ import React from "react";
 import { Admin, Resource } from 'react-admin';
 import Layout from './Layout';
 import theme from "./Layout/theme";
+import LoginPage from "./Pages/LoginPage";
 import Dashboard from "./Pages/Dashboard";
 import { CollectionsList, CollectionCreate } from "./Pages/WallpaperCollections";
 import { BGBlackListList, BGBlackListCreate } from './Pages/BGBlackList';
@@ -19,6 +20,7 @@ function App() {
         <Admin
             theme={theme}
             layout={Layout}
+            loginPage={LoginPage}
             authProvider={authProvider}
             dataProvider={dataProvider}
             i18nProvider={i18nProvider}
