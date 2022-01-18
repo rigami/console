@@ -9,7 +9,7 @@ const useStyles = makeStyles({
         backgroundColor: 'unset',
     },
     logo: {
-        height: 30,
+        height: 36,
         width: 'auto',
     },
     title: {
