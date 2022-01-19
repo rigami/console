@@ -4,9 +4,11 @@ import Layout from './Layout';
 import theme from "./Layout/theme";
 import LoginPage from "./Pages/LoginPage";
 import Dashboard from "./Pages/Dashboard";
+import { UsersList } from './Pages/Users';
 import { CollectionsList, CollectionCreate } from "./Pages/WallpaperCollections";
 import { BlackListList, BlackListCreate } from './Pages/WallpaperBlackList';
 import {
+    PeopleRounded as UsersIcon,
     PhotoRounded as BGIcon,
     CollectionsRounded as BGCollectionsIcon,
     BlockRounded as BGBlackListIcon,
@@ -27,6 +29,12 @@ function App() {
             dashboard={Dashboard}
             disableTelemetry
         >
+            <Resource
+                name="users"
+                options={{ label: "Users" }}
+                list={UsersList}
+                icon={UsersIcon}
+            />
             <Resource
                 name="wallpapers/collections"
                 options={{ label: "Collections", groupIcon: BGIcon }}
