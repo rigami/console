@@ -62,9 +62,9 @@ function ExampleCreateRow() {
     );
 }
 
-export function BlackListCreate (props) {
+export function BlockCreate (props) {
     return (
-        <Create {...props} title="Add background to black list" actions={<PostEditActions />}>
+        <Create {...props} title="Add background to block list" actions={<PostEditActions />}>
             <SimpleForm toolbar={<PostCreateToolbar />}>
                 <ExampleCreateRow />
                 <Typography variant="h5">Add row</Typography>

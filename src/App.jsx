@@ -6,12 +6,12 @@ import LoginPage from "./Pages/LoginPage";
 import Dashboard from "./Pages/Dashboard";
 import { UsersList } from './Pages/Users';
 import { CollectionsList, CollectionCreate } from "./Pages/WallpaperCollections";
-import { BlackListList, BlackListCreate } from './Pages/WallpaperBlackList';
+import { BlockList, BlockCreate } from './Pages/WallpaperBlockList';
 import {
     PeopleRounded as UsersIcon,
-    PhotoRounded as BGIcon,
-    CollectionsRounded as BGCollectionsIcon,
-    BlockRounded as BGBlackListIcon,
+    PhotoRounded as WallpaperIcon,
+    CollectionsRounded as WallpaperCollectionIcon,
+    BlockRounded as WallpaperBlockIcon,
 } from "@material-ui/icons";
 import i18nProvider from './i18nProvider';
 import dataProvider from './dataProvider';
@@ -37,17 +37,17 @@ function App() {
             />
             <Resource
                 name="wallpapers/collections"
-                options={{ label: "Collections", groupIcon: BGIcon }}
+                options={{ label: "Collections", groupIcon: WallpaperIcon }}
                 list={CollectionsList}
                 create={CollectionCreate}
-                icon={BGCollectionsIcon}
+                icon={WallpaperCollectionIcon}
             />
             <Resource
-                name="wallpapers/black-list"
-                options={{ label: "Black list" }}
-                list={BlackListList}
-                create={BlackListCreate}
-                icon={BGBlackListIcon}
+                name="wallpapers/blocked"
+                options={{ label: "Blocked list" }}
+                list={BlockList}
+                create={BlockCreate}
+                icon={WallpaperBlockIcon}
             />
         </Admin>
     );

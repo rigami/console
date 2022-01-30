@@ -13,7 +13,7 @@ import {
     SelectInput,
     UrlField,
 } from 'react-admin';
-import { BlackListCreate } from "./Create";
+import { BlockCreate } from "./Create";
 
 const PostFilter = (props) => (
     <Filter {...props}>
@@ -60,19 +60,20 @@ const ListActions = (props) => {
     );
 };
 
-export const BlackListList = (props) => (
+export const BlockList = (props) => (
     <List {...props} exporter={false} actions={<ListActions />} filters={<PostFilter />}>
         <Datagrid>
             <TextField source="idInSource" label="Id in source" />
             <TextField source="source" />
             <TextField source="blockedType" />
+            <TextField source="blockedMethod" />
             <UrlField source="sourceLink" target="_blank" />
             <DateField source="createDate" showTime />
         </Datagrid>
     </List>
 );
 
-export { BlackListCreate };
+export { BlockCreate };
 
 
 
