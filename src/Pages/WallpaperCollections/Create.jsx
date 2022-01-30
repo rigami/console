@@ -90,12 +90,12 @@ export const CollectionCreate = (props) => {
     const [allowSave, setAllowSave] = useState(false);
 
     const parseLink = (sourceLink) => {
-        let service;
+        let source;
         let type;
-        let idInService;
+        let idInSource;
 
         if (sourceLink.includes('unsplash')) {
-            service = 'unsplash';
+            source = 'unsplash';
             type = 'image';
 
             let sourceLinkFixed = sourceLink;
@@ -104,30 +104,30 @@ export const CollectionCreate = (props) => {
                 sourceLinkFixed = sourceLink.substring(0, sourceLink.lastIndexOf('/'))
             }
 
-            idInService = sourceLinkFixed.substring(sourceLinkFixed.lastIndexOf('/') + 1)
+            idInSource = sourceLinkFixed.substring(sourceLinkFixed.lastIndexOf('/') + 1)
         } else if (sourceLink.includes('pexels')) {
-            service = 'pexels';
+            source = 'pexels';
             type = 'video';
-            idInService = sourceLink.substring(sourceLink.lastIndexOf('-') + 1)
+            idInSource = sourceLink.substring(sourceLink.lastIndexOf('-') + 1)
         } else if (sourceLink.includes('pixabay')) {
-            service = 'pixabay';
+            source = 'pixabay';
             type = 'video';
-            idInService = sourceLink.substring(sourceLink.lastIndexOf('-') + 1)
+            idInSource = sourceLink.substring(sourceLink.lastIndexOf('-') + 1)
         } else {
-            service = '';
+            source = '';
             type = '';
-            idInService = '';
+            idInSource = '';
         }
 
-        if (idInService[idInService.length - 1] === '/') {
-            idInService = idInService.substring(0, idInService.length - 1)
+        if (idInSource[idInSource.length - 1] === '/') {
+            idInSource = idInSource.substring(0, idInSource.length - 1)
         }
 
         return {
             sourceLink,
-            service,
+            source,
             type,
-            idInService,
+            idInSource,
         }
     }
 
@@ -150,25 +150,25 @@ export const CollectionCreate = (props) => {
                             const parsedLink = parseLink(state.sourceLink || '');
 
                             form.batch(() => {
-                                form.change('service', parsedLink.service);
+                                form.change('source', parsedLink.source);
                                 form.change('type', parsedLink.type);
-                                form.change('idInService', parsedLink.idInService);
+                                form.change('idInSource', parsedLink.idInSource);
                             });
 
 
                             setAllowSave(
                                 !!parsedLink.sourceLink
-                                && !!parsedLink.idInService
+                                && !!parsedLink.idInSource
                                 && !!parsedLink.type
-                                && !!parsedLink.service
+                                && !!parsedLink.source
                                 && !!state.collectionType
                             );
                         } else {
                             setAllowSave(
                                 !!state.sourceLink
-                                && !!state.idInService
+                                && !!state.idInSource
                                 && !!state.type
-                                && !!state.service
+                                && !!state.source
                                 && !!state.collectionType
                             );
                         }
@@ -179,7 +179,7 @@ export const CollectionCreate = (props) => {
                     <Typography variant="h5">Add wallpaper in collection</Typography>
                     <TextInput source="sourceLink" />
                     <SelectInput
-                        source="service"
+                        source="source"
                         allowEmpty={false}
                         choices={[
                             { id: 'unsplash', name: 'Unsplash' },
@@ -196,15 +196,14 @@ export const CollectionCreate = (props) => {
                         ]}
                     />
                     <TextInput
-                        source="idInService"
-                        label="Id in service"
+                        source="idInSource"
+                        label="Id in source"
                     />
                     <SelectInput
                         source="collectionType"
                         allowEmpty={false}
                         choices={[
-                            { id: 'default', name: 'Default' },
-                            { id: 'best', name: 'Best' },
+                            { id: 'editor-choice', name: 'Editor choice' },
                         ]}
                     />
                 </Box>

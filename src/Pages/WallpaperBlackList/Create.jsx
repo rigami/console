@@ -68,9 +68,9 @@ export function BlackListCreate (props) {
             <SimpleForm toolbar={<PostCreateToolbar />}>
                 <ExampleCreateRow />
                 <Typography variant="h5">Add row</Typography>
-                <TextInput source="idInService" label="Id in service" />
+                <TextInput source="idInSource" label="Id in source" />
                 <TextInput source="sourceLink" />
-                <SelectInput source="service" allowEmpty={false} choices={[
+                <SelectInput source="source" allowEmpty={false} choices={[
                     { id: 'unsplash', name: 'Unsplash' },
                     { id: 'pexels', name: 'Pexels' },
                     { id: 'pixabay', name: 'Pixabay' },

@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const PostFilter = (props) => (
     <Filter {...props}>
-        <TextInput label="Search by id in service" source="idInService" alwaysOn />
+        <TextInput label="Search by id in source" source="idInSource" alwaysOn />
         <SelectInput
             source="collectionType"
             allowEmpty={false}
@@ -45,7 +45,7 @@ const PostFilter = (props) => (
             ]}
         />
         <SelectInput
-            source="service"
+            source="source"
             allowEmpty={false}
             choices={[
                 { id: '', name: 'All' },
@@ -105,12 +105,12 @@ const Wallpaper = ({ record, ...props }) => {
             <Box>
                 <Typography variant="h5" color="textPrimary" gutterBottom>{record.type}</Typography>
                 <Typography variant="body2" color="textPrimary">
-                    <Typography variant="inherit" component="span" color="textSecondary">idInService: </Typography>
-                    {record.idInService}
+                    <Typography variant="inherit" component="span" color="textSecondary">idInSource: </Typography>
+                    {record.idInSource}
                 </Typography>
                 <Typography variant="body1" color="textPrimary" gutterBottom>
-                    <Typography variant="inherit" component="span" color="textSecondary">service: </Typography>
-                    {record.service}
+                    <Typography variant="inherit" component="span" color="textSecondary">source: </Typography>
+                    {record.source}
                 </Typography>
                 <Typography variant="caption" color="textSecondary">id: {record.id}</Typography>
             </Box>

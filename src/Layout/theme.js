@@ -64,7 +64,7 @@ const theme = createTheme({
                 },
             },
         },
-        MuiButton: { label: { wordBreak: 'break-word', fontWeight: 800 } },
+        MuiButton: { label: { wordBreak: 'break-word', fontWeight: 600 } },
         MuiTableCell: {
             head: {
                 fontWeight: 600,

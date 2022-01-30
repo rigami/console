@@ -19,7 +19,7 @@ const PostFilter = (props) => (
     <Filter {...props}>
         <TextInput label="Search by id" source="bg_id" alwaysOn />
         <SelectInput
-            source="service"
+            source="source"
             allowEmpty={false}
             choices={[
                 { id: '', name: 'All' },
@@ -63,8 +63,8 @@ const ListActions = (props) => {
 export const BlackListList = (props) => (
     <List {...props} exporter={false} actions={<ListActions />} filters={<PostFilter />}>
         <Datagrid>
-            <TextField source="idInService" label="Id in service" />
-            <TextField source="service" />
+            <TextField source="idInSource" label="Id in source" />
+            <TextField source="source" />
             <TextField source="blockedType" />
             <UrlField source="sourceLink" target="_blank" />
             <DateField source="createDate" showTime />
