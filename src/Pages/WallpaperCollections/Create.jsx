@@ -203,7 +203,7 @@ export const CollectionCreate = (props) => {
                         source="collectionType"
                         allowEmpty={false}
                         choices={[
-                            { id: 'editor-choice', name: 'Editor choice' },
+                            { id: 'editors-choice', name: 'Editors choice' },
                         ]}
                     />
                 </Box>
