@@ -11,14 +11,9 @@ import {
     Filter,
     TextInput,
     SelectInput,
-    ListButton,
-    Create,
-    SimpleForm,
-    UrlField,
-    Toolbar,
-    SaveButton, BulkDeleteButton,
+    BulkDeleteButton,
 } from 'react-admin';
-import {Box, Breadcrumbs, CardMedia, Divider, Link, Typography} from "@material-ui/core";
+import {Box, CardMedia, Link, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import { CollectionCreate } from './Create';
 

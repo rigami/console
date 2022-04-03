@@ -1,4 +1,4 @@
-import React, {cloneElement} from "react";
+import React, {cloneElement, Fragment} from "react";
 import {
     List,
     Datagrid,
@@ -11,13 +11,13 @@ import {
     Filter,
     TextInput,
     SelectInput,
-    UrlField,
+    UrlField, BulkDeleteButton,
 } from 'react-admin';
 import { BlockCreate } from "./Create";
 
 const PostFilter = (props) => (
     <Filter {...props}>
-        <TextInput label="Search by id" source="bg_id" alwaysOn />
+        <TextInput label="Search by id" source="idInSource" alwaysOn />
         <SelectInput
             source="source"
             allowEmpty={false}
@@ -60,8 +60,21 @@ const ListActions = (props) => {
     );
 };
 
+const PostBulkActionButtons = props => (
+    <Fragment>
+        <BulkDeleteButton {...props} undoable={false} />
+    </Fragment>
+);
+
+
 export const BlockList = (props) => (
-    <List {...props} exporter={false} actions={<ListActions />} filters={<PostFilter />}>
+    <List
+        {...props}
+        exporter={false}
+        actions={<ListActions />}
+        bulkActionButtons={<PostBulkActionButtons />}
+        filters={<PostFilter />}
+    >
         <Datagrid>
             <TextField source="idInSource" label="Id in source" />
             <TextField source="source" />
